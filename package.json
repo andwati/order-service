@@ -9,5 +9,23 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.26.0"
+  "packageManager": "pnpm@10.26.0",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@eslint/json": "^0.14.0",
+    "@eslint/markdown": "^7.5.1",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.6",
+    "eslint": "^9.39.2",
+    "globals": "^17.0.0",
+    "nodemon": "^3.1.11",
+    "prettier": "^3.7.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.52.0"
+  }
 }

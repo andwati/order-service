@@ -1,0 +1,71 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json.tmp
+*.tgz
+
+# Environment files
+.env
+.env.*.local
+.env.local
+.env.test
+.env.production
+
+# Logs
+logs/
+*.log
+jest*.log
+*.out
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+*.sock
+
+# Coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# Build / dependency output
+dist/
+build/
+out/
+.tmp/
+.tmp-*
+.cache/
+.vite/
+.parcel-cache/
+.next/
+.nuxt/
+.serverless/
+.expo/
+
+# TypeScript
+*.tsbuildinfo
+
+# ESLint, Babel, Metro & other caches
+.eslintcache
+.babel.json
+babel.config.js.map
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.local
+*.log.*
+*.bak
+*.swp
