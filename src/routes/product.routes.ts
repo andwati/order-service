@@ -10,6 +10,27 @@ import {
 
 const router: Router = Router();
 
+/**
+ * @openapi
+ * /products:
+ *   post:
+ *     tags:
+ *       - Products
+ *     summary: Create a product
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Product'
+ *     responses:
+ *       201:
+ *         description: Product created
+ *       403:
+ *         description: Not authorized
+ */
 router.post(
   "/",
   authMiddleware,
@@ -18,6 +39,33 @@ router.post(
   ProductController.create,
 );
 
+/**
+ * @openapi
+ * /products/{id}:
+ *   patch:
+ *     tags:
+ *       - Products
+ *     summary: Update a product
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Product'
+ *     responses:
+ *       200:
+ *         description: Product updated
+ *       404:
+ *         description: Product not found
+ */
 router.patch(
   "/:id",
   authMiddleware,
@@ -26,6 +74,23 @@ router.patch(
   ProductController.update,
 );
 
+/**
+ * @openapi
+ * /products:
+ *   get:
+ *     tags:
+ *       - Products
+ *     summary: List all products
+ *     responses:
+ *       200:
+ *         description: List of products
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
+ */
 router.get("/", ProductController.list);
 
 export default router;

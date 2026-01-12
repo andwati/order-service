@@ -40,4 +40,30 @@ const userSchema = new Schema<UserDocument>(
   },
 );
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The user ID
+ *         email:
+ *           type: string
+ *           description: The user's email
+ *         role:
+ *           type: string
+ *           enum: [admin, customer]
+ *           description: The user's role
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date the user was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date the user was updated
+ */
 export const UserModel = model<UserDocument>("User", userSchema);

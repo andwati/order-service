@@ -75,4 +75,44 @@ const orderSchema = new Schema<OrderDocument>(
   },
 );
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Order:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The order ID
+ *         userId:
+ *           type: string
+ *           description: The user ID who placed the order
+ *         items:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: string
+ *               quantity:
+ *                 type: number
+ *               unitPrice:
+ *                 type: number
+ *         total:
+ *           type: number
+ *           description: The total order amount in cents
+ *         status:
+ *           type: string
+ *           enum: [created, paid, cancelled]
+ *           description: The order status
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date the order was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date the order was updated
+ */
 export const OrderModel = model<OrderDocument>("Order", orderSchema);

@@ -37,4 +37,32 @@ const productSchema = new Schema<ProductDocument>(
   },
 );
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Product:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The product ID
+ *         name:
+ *           type: string
+ *           description: The product name
+ *         price:
+ *           type: number
+ *           description: The product price in cents
+ *         stock:
+ *           type: number
+ *           description: The product stock quantity
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date the product was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date the product was updated
+ */
 export const ProductModel = model<ProductDocument>("Product", productSchema);
