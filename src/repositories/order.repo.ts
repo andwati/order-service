@@ -4,13 +4,15 @@ import { OrderModel, type OrderDocument } from "../models/order.model.js";
 export class OrderRepository {
   static create(
     data: Omit<OrderDocument, "_id" | "createdAt" | "updatedAt">,
-    session: ClientSession,
+    session?: ClientSession,
   ): Promise<OrderDocument> {
-    return OrderModel.create(data, { session });
+    const order = new OrderModel(data);
+    return order.save({ session: session ?? undefined });
   }
 
   static findById(id: string, session?: ClientSession) {
-    return OrderModel.findById(id).session(session ?? null);
+    const query = OrderModel.findById(id);
+    return session ? query.session(session) : query;
   }
 
   static findAll() {

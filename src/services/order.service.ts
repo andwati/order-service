@@ -4,13 +4,86 @@ import { OrderRepository } from "../repositories/order.repo.js";
 
 export class OrderService {
   static listOrders(userId: string, role: string) {
-    throw new Error("Method not implemented.");
+    if (String(role).toLowerCase() === "admin") {
+      return OrderRepository.findAll();
+    }
+
+    return OrderRepository.findByUser(userId);
   }
-  static payOrder(id: string | string[] | undefined) {
-    throw new Error("Method not implemented.");
+  static async payOrder(id: string | string[] | undefined) {
+    if (!id || Array.isArray(id)) {
+      throw { statusCode: 400, message: "Invalid order id" };
+    }
+
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    try {
+      const order = await OrderRepository.findById(id, session);
+
+      if (!order) {
+        throw { statusCode: 404, message: "Order not found" };
+      }
+
+      if (order.status === "paid") {
+        throw { statusCode: 409, message: "Order is already paid" };
+      }
+
+      if (order.status === "cancelled") {
+        throw { statusCode: 409, message: "Cannot pay a cancelled order" };
+      }
+
+      order.status = "paid";
+      await OrderRepository.save(order, session);
+
+      await session.commitTransaction();
+      return order;
+    } catch (err) {
+      await session.abortTransaction();
+      throw err;
+    } finally {
+      session.endSession();
+    }
   }
-  static cancelOrder(id: string | string[] | undefined) {
-    throw new Error("Method not implemented.");
+  static async cancelOrder(id: string | string[] | undefined) {
+    if (!id || Array.isArray(id)) {
+      throw { statusCode: 400, message: "Invalid order id" };
+    }
+
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    try {
+      const order = await OrderRepository.findById(id, session);
+
+      if (!order) {
+        throw { statusCode: 404, message: "Order not found" };
+      }
+
+      if (order.status === "cancelled") {
+        throw { statusCode: 409, message: "Order is already cancelled" };
+      }
+
+      // restore stock for each item
+      for (const item of order.items) {
+        await ProductRepository.incrementStock(
+          item.productId,
+          item.quantity,
+          session,
+        );
+      }
+
+      order.status = "cancelled";
+      await OrderRepository.save(order, session);
+
+      await session.commitTransaction();
+      return order;
+    } catch (err) {
+      await session.abortTransaction();
+      throw err;
+    } finally {
+      session.endSession();
+    }
   }
   static async createOrder(
     userId: string,

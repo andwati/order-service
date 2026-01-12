@@ -15,6 +15,7 @@ export class UserRepository {
     data: Pick<UserDocument, "email" | "passwordHash" | "role">,
     session?: ClientSession,
   ): Promise<UserDocument> {
-    return UserModel.create([data], { session }).then((res) => res[0]);
+    const user = new UserModel(data);
+    return user.save({ session: session ?? undefined });
   }
 }
