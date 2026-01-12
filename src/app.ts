@@ -4,7 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 
 import { errorHandler } from "./middleware/error.middleware.js";
-import { authRoutes } from "./routes/auth.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 

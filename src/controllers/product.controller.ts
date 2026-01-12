@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { ProductService } from "../services/product.service";
+import type { Request, Response, NextFunction } from "express";
+import { ProductService } from "../services/product.service.js";
 
 export class ProductController {
   static async create(req: Request, res: Response, next: NextFunction) {

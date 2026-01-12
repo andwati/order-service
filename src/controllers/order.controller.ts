@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { OrderService } from "../services/order.service";
+import type { Request, Response, NextFunction } from "express";
+import { OrderService } from "../services/order.service.js";
 
 export class OrderController {
   static async create(req: Request, res: Response, next: NextFunction) {
