@@ -3,10 +3,10 @@ import type { Application } from "express";
 import cors from "cors";
 import morgan from "morgan";
 
-import { errorHandler } from "./middleware/error.middleware";
-import authRoutes from "./routes/auth.routes";
-import productRoutes from "./routes/product.routes";
-import orderRoutes from "./routes/order.routes";
+import { errorHandler } from "./middleware/error.middleware.js";
+import { authRoutes } from "./routes/auth.routes.js";
+import productRoutes from "./routes/product.routes.js";
+import orderRoutes from "./routes/order.routes.js";
 
 const app: Application = express();
 
