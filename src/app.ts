@@ -7,6 +7,7 @@ import { errorHandler } from "./middleware/error.middleware.js";
 import authRoutes from "./routes/auth.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import orderRoutes from "./routes/order.routes.js";
+import docsRoutes from "./routes/docs.routes.js";
 
 const app: Application = express();
 
@@ -24,6 +25,8 @@ app.get("/health", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
+// swagger ui
+app.use("/docs", docsRoutes);
 
 // error handling middleware
 app.use(errorHandler);
