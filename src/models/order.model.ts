@@ -43,7 +43,7 @@ const orderSchema = new Schema<OrderDocument>(
   {
     _id: {
       type: String,
-      default: uuidv4,
+      default: () => uuidv4(),
     },
     userId: {
       type: String,

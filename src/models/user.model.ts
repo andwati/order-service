@@ -16,7 +16,7 @@ const userSchema = new Schema<UserDocument>(
   {
     _id: {
       type: String,
-      default: uuidv4,
+      default: () => uuidv4(),
     },
     email: {
       type: String,
