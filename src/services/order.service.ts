@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { ProductRepository } from "../repositories/product.repo";
-import { OrderRepository } from "../repositories/order.repo";
+import { ProductRepository } from "../repositories/product.repo.js";
+import { OrderRepository } from "../repositories/order.repo.js";
 
 export class OrderService {
   static async createOrder(

@@ -1,29 +1,22 @@
-import { ProductModel } from "../models/product.model";
+import { ProductRepository } from "../repositories/product.repo.js";
 
 export class ProductService {
-  static async create(data: { name: string; price: number; stock: number }) {
-    const product = await ProductModel.create(data);
-    return product;
+  static create(data: { name: string; price: number; stock: number }) {
+    return ProductRepository.create(data);
   }
 
-  static async list() {
-    return ProductModel.find().lean();
+  static list() {
+    return ProductRepository.findAll();
   }
 
   static async update(
     id: string,
     data: Partial<{ name: string; price: number; stock: number }>,
   ) {
-    const product = await ProductModel.findByIdAndUpdate(
-      id,
-      { $set: data },
-      { new: true },
-    );
-
+    const product = await ProductRepository.updateById(id, data);
     if (!product) {
       throw { statusCode: 404, message: "Product not found" };
     }
-
     return product;
   }
 }

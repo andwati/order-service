@@ -1,14 +1,14 @@
 import { Router } from "express";
-import { OrderController } from "../controllers/order.controller";
-import { authMiddleware } from "../middleware/auth.middleware";
-import { requireRole } from "../middleware/role.middleware";
-import { validate } from "../middleware/validate.middleware";
+import { OrderController } from "../controllers/order.controller.js";
+import { authMiddleware } from "../middleware/auth.middleware.js";
+import { requireRole } from "../middleware/role.middleware.js";
+import { validate } from "../middleware/validate.middleware.js";
 import {
   createOrderSchema,
   orderIdParamSchema,
-} from "../validation/order.schema";
+} from "../validation/order.schema.js";
 
-const router = Router();
+const router: Router = Router();
 
 router.post(
   "/",

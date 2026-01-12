@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { AuthController } from "../controllers/auth.controller";
-import { validate } from "../middleware/validate.middleware";
-import { authRateLimiter } from "../middleware/rateLimit.middleware";
-import { registerSchema, loginSchema } from "../validation/auth.schema";
+import { AuthController } from "../controllers/auth.controller.js";
+import { validate } from "../middleware/validate.middleware.js";
+import { authRateLimiter } from "../middleware/rateLimit.middleware.js";
+import { registerSchema, loginSchema } from "../validation/auth.schema.js";
 
-const router = Router();
+const router: Router = Router();
 
 router.post(
   "/register",
