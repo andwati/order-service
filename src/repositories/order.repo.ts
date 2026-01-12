@@ -7,7 +7,7 @@ export class OrderRepository {
     session?: ClientSession,
   ): Promise<OrderDocument> {
     const order = new OrderModel(data);
-    return order.save({ session: session ?? undefined });
+    return order.save();
   }
 
   static findById(id: string, session?: ClientSession) {

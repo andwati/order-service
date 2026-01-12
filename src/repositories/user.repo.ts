@@ -16,6 +16,6 @@ export class UserRepository {
     session?: ClientSession,
   ): Promise<UserDocument> {
     const user = new UserModel(data);
-    return user.save({ session: session ?? undefined });
+    return user.save();
   }
 }
