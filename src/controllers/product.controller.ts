@@ -23,6 +23,10 @@ export class ProductController {
   static async update(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
+      if (typeof id !== "string") {
+        res.status(400);
+        return next({ statusCode: 400, message: "Invalid product id" });
+      }
       const product = await ProductService.update(id, req.body);
       res.status(200).json(product);
     } catch (err) {

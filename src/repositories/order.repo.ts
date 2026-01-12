@@ -6,7 +6,7 @@ export class OrderRepository {
     data: Omit<OrderDocument, "_id" | "createdAt" | "updatedAt">,
     session: ClientSession,
   ): Promise<OrderDocument> {
-    return OrderModel.create([data], { session }).then((res) => res[0]);
+    return OrderModel.create(data, { session });
   }
 
   static findById(id: string, session?: ClientSession) {
@@ -21,7 +21,14 @@ export class OrderRepository {
     return OrderModel.find({ userId }).lean();
   }
 
-  static save(order: OrderDocument, session?: ClientSession) {
-    return order.save({ session });
+  static save(
+    order: OrderDocument & {
+      save: (options?: {
+        session?: ClientSession | null;
+      }) => Promise<OrderDocument>;
+    },
+    session?: ClientSession,
+  ) {
+    return order.save({ session: session ?? null });
   }
 }

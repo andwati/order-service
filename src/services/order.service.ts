@@ -3,6 +3,15 @@ import { ProductRepository } from "../repositories/product.repo.js";
 import { OrderRepository } from "../repositories/order.repo.js";
 
 export class OrderService {
+  static listOrders(userId: string, role: string) {
+    throw new Error("Method not implemented.");
+  }
+  static payOrder(id: string | string[] | undefined) {
+    throw new Error("Method not implemented.");
+  }
+  static cancelOrder(id: string | string[] | undefined) {
+    throw new Error("Method not implemented.");
+  }
   static async createOrder(
     userId: string,
     items: { productId: string; quantity: number }[],
