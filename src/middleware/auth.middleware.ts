@@ -1,13 +1,37 @@
-import { Router } from "express";
+import type { NextFunction, Request, Response } from "express";
+import { verifyToken } from "../utils/jwt.js";
 
-const router = Router();
+export function authMiddleware(
+  req: Request,
+  _res: Response,
+  next: NextFunction,
+) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return next({
+      status: 401,
+      message: "Missing or invalid Authorization header",
+    });
+  }
 
-router.post("/register", (_req, res) => {
-  res.status(501).json({ message: "Register endpoint not implemented yet." });
-});
+  const token = authHeader.split(" ")[1];
 
-router.post("/login", (_req, res) => {
-  res.status(501).json({ message: "Login endpoint not implemented yet." });
-});
+  if (!token) {
+    return next({
+      status: 401,
+      message: "Missing token",
+    });
+  }
 
-export default router;
+  try {
+    const payload = verifyToken(token);
+    req.user = payload;
+
+    next();
+  } catch {
+    next({
+      statusCode: 401,
+      message: "Invalid or expired token",
+    });
+  }
+}
