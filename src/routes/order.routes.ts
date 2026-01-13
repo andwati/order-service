@@ -44,7 +44,7 @@ const router: Router = Router();
 router.post(
   "/",
   authMiddleware,
-  requireRole("customer"),
+  requireRole(["customer", "admin"]),
   validate(createOrderSchema),
   OrderController.create,
 );
