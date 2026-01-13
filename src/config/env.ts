@@ -15,6 +15,7 @@ function requireEnv(key: string): string {
 export const env = {
   nodeEnv: process.env.NODE_ENV ?? "development",
   port: Number(process.env.PORT) ?? 3000,
+  API_URL: process.env.API_URL ?? "http://localhost:3000",
 
   mongoUri: requireEnv("MONGO_URI"),
 
