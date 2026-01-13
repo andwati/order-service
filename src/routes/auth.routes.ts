@@ -13,22 +13,52 @@ const router: Router = Router();
  *     tags:
  *       - Auth
  *     summary: Register a new user
+ *     security: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - email
+ *               - password
  *             properties:
  *               email:
  *                 type: string
+ *                 format: email
+ *                 description: User's email address
  *               password:
  *                 type: string
+ *                 minLength: 8
+ *                 description: User's password (minimum 8 characters)
+ *               role:
+ *                 type: string
+ *                 enum: [customer, admin]
+ *                 default: customer
+ *                 description: Account type (defaults to customer)
  *     responses:
  *       201:
- *         description: User created
+ *         description: User created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   description: The user ID
+ *                 email:
+ *                   type: string
+ *                   description: The user's email
+ *                 role:
+ *                   type: string
+ *                   enum: [customer, admin]
+ *                   description: The user's role
  *       400:
  *         description: Invalid input
+ *       409:
+ *         description: Email already registered
  */
 router.post(
   "/register",
