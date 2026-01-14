@@ -4,9 +4,11 @@ import cors from "cors";
 import morgan from "morgan";
 
 import { errorHandler } from "./middleware/error.middleware.js";
+import { logger } from "./utils/logger.js";
 import authRoutes from "./routes/auth.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import orderRoutes from "./routes/order.routes.js";
+import userRoutes from "./routes/user.routes.js";
 import docsRoutes from "./routes/docs.routes.js";
 
 const app: Application = express();
@@ -14,7 +16,10 @@ const app: Application = express();
 //global middleware
 app.use(cors());
 app.use(express.json());
-app.use(morgan("dev"));
+
+// HTTP request logging with morgan
+const morganFormat = ":method :url :status :res[content-length] - :response-time ms";
+app.use(morgan(morganFormat, { stream: logger.stream }));
 
 // health check route
 app.get("/health", (req, res) => {
@@ -25,6 +30,7 @@ app.get("/health", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
+app.use("/users", userRoutes);
 // swagger ui
 app.use("/docs", docsRoutes);
 

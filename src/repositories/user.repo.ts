@@ -3,6 +3,10 @@ import { UserModel } from "../models/user.model.js";
 import type { UserDocument } from "../models/user.model.js";
 
 export class UserRepository {
+  static findAll(): Promise<UserDocument[]> {
+    return UserModel.find().select("-passwordHash");
+  }
+
   static findByEmail(email: string): Promise<UserDocument | null> {
     return UserModel.findOne({ email });
   }

@@ -1,9 +1,10 @@
 import { UserRepository } from "../repositories/user.repo.js";
 import { hashPassword, verifyPassword } from "../utils/password.js";
 import { signToken } from "../utils/jwt.js";
+import type { UserRole } from "../models/user.model.js";
 
 export class AuthService {
-  static async register(email: string, password: string) {
+  static async register(email: string, password: string, role: UserRole = "customer") {
     const existing = await UserRepository.findByEmail(email);
     if (existing) {
       throw { statusCode: 409, message: "Email already registered" };
@@ -14,7 +15,7 @@ export class AuthService {
     const user = await UserRepository.create({
       email,
       passwordHash,
-      role: "customer",
+      role,
     });
 
     return { id: user._id, email: user.email, role: user.role };
