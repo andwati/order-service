@@ -1,4 +1,4 @@
-## Order Service
+# Order Service
 
 An **order management REST API** with authentication, role-based access control, and MongoDB persistence. It exposes endpoints for:
 
@@ -9,9 +9,11 @@ An **order management REST API** with authentication, role-based access control,
 
 Built with **Node.js**, **Express 5**, **TypeScript**, and **Mongoose**.
 
+Swagger doc for test in the browser: <https://order-service-t77z.onrender.com/docs/>
+
 ---
 
-### 1. Setup & Installation
+## 1. Setup & Installation
 
 - **Prerequisites**
   - **Node.js**: v20+ recommended
@@ -44,7 +46,7 @@ The API will listen on `http://localhost:<PORT>` (defaults to `3000`).
 
 ---
 
-### 2. Environment Variables
+## 2. Environment Variables
 
 Environment variables are loaded via `dotenv` in `src/config/env.ts`. The following variables are **required/recommended**:
 
@@ -80,7 +82,7 @@ Create a `.env` file at the project root before running the server or scripts.
 
 ---
 
-### 3. Database, Migrations & Seeding
+## 3. Database, Migrations & Seeding
 
 This project uses **MongoDB + Mongoose**. There is no formal migration tool configured; schemas are defined via Mongoose models under `src/models`.
 
@@ -113,7 +115,7 @@ Make sure:
 
 ---
 
-### 4. Running the Service
+## 4. Running the Service
 
 - **Build once:**
 
@@ -138,9 +140,9 @@ The service will:
 
 ---
 
-### 5. API Reference & Example `curl` Requests
+## 5. API Reference & Example `curl` Requests
 
-#### 5.1 Health Check
+## 5.1 Health Check
 
 - **GET `/health`**
 
@@ -150,9 +152,9 @@ curl -i https://order-service-t77z.onrender.com/health
 
 ---
 
-#### 5.2 Auth
+## 5.2 Auth
 
-##### Register
+### Register
 
 - **POST `/auth/register`**
 - Body:
@@ -169,7 +171,7 @@ curl -i -X POST https://order-service-t77z.onrender.com/auth/register \
 
 For an admin user, set `"role": "admin"`.
 
-##### Login
+### Login
 
 - **POST `/auth/login`**
 
@@ -190,9 +192,9 @@ Authorization: Bearer <token>
 
 ---
 
-#### 5.3 Products
+## 5.3 Products
 
-##### List products (public)
+### List products (public)
 
 - **GET `/products`**
 
@@ -200,7 +202,7 @@ Authorization: Bearer <token>
 curl -i https://order-service-t77z.onrender.com/products
 ```
 
-##### Create product (admin only)
+### Create product (admin only)
 
 - **POST `/products`**
 
@@ -215,7 +217,7 @@ curl -i -X POST https://order-service-t77z.onrender.com/products \
   }'
 ```
 
-##### Update product (admin only)
+### Update product (admin only)
 
 - **PATCH `/products/:id`**
 
@@ -231,9 +233,9 @@ curl -i -X PATCH https://order-service-t77z.onrender.com/products/<productId> \
 
 ---
 
-#### 5.4 Orders
+## 5.4 Orders
 
-##### Create order (customer or admin)
+### Create order (customer or admin)
 
 - **POST `/orders`**
 
@@ -249,7 +251,7 @@ curl -i -X POST https://order-service-t77z.onrender.com/orders \
   }'
 ```
 
-##### List my orders
+### List my orders
 
 - **GET `/orders`**
 
@@ -258,7 +260,7 @@ curl -i https://order-service-t77z.onrender.com/orders \
   -H "Authorization: Bearer <token>"
 ```
 
-##### Pay for an order
+### Pay for an order
 
 - **POST `/orders/:id/pay`**
 
@@ -267,7 +269,7 @@ curl -i -X POST https://order-service-t77z.onrender.com/orders/<orderId>/pay \
   -H "Authorization: Bearer <token>"
 ```
 
-##### Cancel an order
+### Cancel an order
 
 - **POST `/orders/:id/cancel`**
 
@@ -278,9 +280,9 @@ curl -i -X POST https://order-service-t77z.onrender.com/orders/<orderId>/cancel 
 
 ---
 
-#### 5.5 Users (Admin only)
+## 5.5 Users (Admin only)
 
-##### List users
+### List users
 
 - **GET `/users`**
 
@@ -291,7 +293,7 @@ curl -i https://order-service-t77z.onrender.com/users \
 
 ---
 
-### 6. Swagger / API Docs
+## 6. Swagger / API Docs
 
 The service is wired with `swagger-jsdoc` and `swagger-ui-express`. OpenAPI annotations live in the route files (e.g. `src/routes/auth.routes.ts`, `src/routes/order.routes.ts`, etc) and are aggregated in the Swagger configuration.
 
@@ -305,7 +307,7 @@ This provides an interactive UI for exploring and testing all endpoints.
 
 ---
 
-### 7. Design Notes
+## 7. Design Notes
 
 - **Architecture**
   - **Layered structure**:
