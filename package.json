@@ -11,7 +11,10 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "seed": "tsc && node dist/scripts/seed.js"
+    "seed": "tsc && node dist/scripts/seed.js",
+    "test": "vitest",
+    "test:unit": "vitest run src/tests/unit",
+    "test:integration": "vitest run src/tests/integration"
   },
   "keywords": [],
   "author": "",
@@ -40,15 +43,19 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/morgan": "^1.9.10",
     "@types/node": "^25.0.6",
+    "@types/supertest": "^6.0.3",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
+    "@vitest/coverage-v8": "^4.0.17",
     "eslint": "^9.39.2",
     "globals": "^17.0.0",
     "jsonwebtoken": "^9.0.3",
     "nodemon": "^3.1.11",
     "prettier": "^3.7.4",
+    "supertest": "^7.2.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.52.0"
+    "typescript-eslint": "^8.52.0",
+    "vitest": "^4.0.17"
   }
 }
