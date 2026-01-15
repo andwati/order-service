@@ -42,6 +42,7 @@ describe("OrderService", () => {
   describe("listOrders", () => {
     it("lists all orders for admin role", async () => {
       const orders = [{ id: "1" }];
+      // @ts-ignore
       mockedOrderRepo.findAll.mockResolvedValueOnce(orders as never);
 
       const result = await OrderService.listOrders("user-id", "admin");
@@ -52,6 +53,7 @@ describe("OrderService", () => {
 
     it("lists user orders for non-admin role", async () => {
       const orders = [{ id: "2" }];
+      // @ts-ignore
       mockedOrderRepo.findByUser.mockResolvedValueOnce(orders as never);
 
       const result = await OrderService.listOrders("user-123", "customer");
