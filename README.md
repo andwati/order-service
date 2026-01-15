@@ -336,5 +336,3 @@ This provides an interactive UI for exploring and testing all endpoints.
 - **Observability & DX**
   - `morgan` + custom `logger` provide structured request logs.
   - TypeScript configuration (`tsconfig.json`) and linting (`eslint.config.mts`) encourage a consistent, safe codebase.
-
-This design aims to emulate a **production-style order service** that is still compact enough to reason about in an interview setting while showcasing authentication, authorization, validation, error handling, and data modeling.
